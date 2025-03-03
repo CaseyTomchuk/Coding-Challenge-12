@@ -64,3 +64,27 @@ function removeInventoryItem(item) { // function that runs on click when we want
     const inventoryListItem = document.getElementById("inventoryList");
     inventoryListItem.removeChild(item); // remove the item from the list
 };
+
+// Task 4: Business Customer Section – Handling Event Bubbling
+
+const customerSec = document.getElementById("customerSection");
+const customers = ["Customer 1", "Customer 2", "Customer 3"]; // initializing the customer cards in the HTML doc
+
+customers.forEach(customer => {
+    const card = document.createElement("div"); // creates new div element 
+    card.className = "customer-card"; // sets the class for the new div element to customer card
+    card.textContent = customer; // text content of the card should be the customer parameter
+    customerSec.appendChild(card); // a card is created for each item in the customers array, and we are appending it to the customerSection <div>
+});
+
+customerSec.addEventListener("click", function () { // attaching click event listener to the container
+    console.log("Parent container clicked");
+});
+
+const customerCards = document.querySelectorAll(".customer-card"); 
+customerCards.forEach(card => { // attaching click event listener for each customer card
+    card.addEventListener("click", function (event) {
+        console.log("Customer card clicked");
+        event.stopPropagation(); // if this is removed, it will output both on click events (parent and cutomer card)
+    });
+});
