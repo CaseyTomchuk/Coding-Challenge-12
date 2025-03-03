@@ -13,3 +13,34 @@ revCard.innerHTML = // this will be the initial html content of the revenue card
     <p> $0 </p>`;
 
 dashboardItem.appendChild(revCard); // revenue card will be added to the dashboard <div>
+
+// Task 2: Updating Dashboard Metrics – Working with NodeLists and Arrays
+
+// These next couple steps are just a repeat of Task 1
+
+const profitCard = document.createElement("div"); 
+const expensesCard = document.createElement("div");
+
+profitCard.setAttribute("class", "metric-card");
+profitCard.setAttribute("id", "profitCard");
+expensesCard.setAttribute("class", "metric-card");
+expensesCard.setAttribute("id", "expensesCard");
+
+profitCard.innerHTML = `<h2>Profit</h2>
+<p> $0 </p>`;
+
+expensesCard.innerHTML = `<h2>Expenses</h2>
+<p> $0 </p>`;
+
+dashboardItem.appendChild(profitCard); // appending our new items
+dashboardItem.appendChild(expensesCard); 
+
+const metricCardSelector = document.querySelectorAll(".metric-card"); // selecting all items with the metric-card class
+
+let nodeArray = Array.from(metricCardSelector); // converting the resulting NodeList into an array.
+
+nodeArray.forEach((item) => { // (item) represents an individual metric card, for each metric card we are running:
+    const paragraph = item.querySelector("p"); // selecting only <p> to have its text updated so I dont ruin the existing formatting or headers
+    paragraph.textContent = paragraph.textContent + " - Updated"; // updating the <p> text content of all metric cards
+    item.style.backgroundColor = 'lightblue'; // set background color of the cards to light blue
+});
